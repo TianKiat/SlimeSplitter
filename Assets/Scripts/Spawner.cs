@@ -15,16 +15,31 @@ public class Spawner : MonoBehaviour {
 	private GameObject[] spawnables; // balls that this spawner can spawn
 
 	private SpawningBox spawnBox; // spawn box instance
+
+	private Vector2[] savedSpawnPos; // saved spawn positions
 	// Use this for initialization
 	void Start () 
 	{
 		origin = transform.position;
 		spawnBox = CreateSpawnBox(width, height); // initialize the spawn box
+		// init seed
+		// if (PlayerPrefs.HasKey("seed"))
+		// {
+		// 	Random.InitState(PlayerPrefs.GetInt("seed"));
+		// }
+		// else
+		// {
+		// 	int seed = System.DateTime.Now.Minute;
+		// 	PlayerPrefs.SetInt("seed", seed);
+		// }
 	}
 	// Method: spawn a given number of balls
 	public void SpawnBalls(int _numOfBalls)
 	{
+		Random.InitState(PlayerPrefs.GetInt("seed"));
+		Debug.Log(PlayerPrefs.GetInt("seed"));
 		Vector2 lastSpawnPosition = origin; // position of ball that was last spawned
+		Vector2[] savedPos = new Vector2[_numOfBalls];
 		for (int i = 0; i < _numOfBalls; ++i) 
 		{
 			// generate random position within the spawnBox
@@ -41,13 +56,13 @@ public class Spawner : MonoBehaviour {
 
 				// update last spawn position
 				lastSpawnPosition = spawnPos;
+				savedPos[i] = spawnPos;
 			} else 
 			{
 				// decrease the iterator to try again
 				--i;
 			}
 		}
-
 	}
 
 	// Method: create spawning box

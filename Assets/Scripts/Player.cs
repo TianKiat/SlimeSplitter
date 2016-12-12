@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class Player : MonoBehaviour {
 
 	public float speed = 4f;
@@ -24,7 +23,7 @@ public class Player : MonoBehaviour {
 		if (col.collider.tag == "Ball")
 		{
 			Debug.Log("GAME OVER!");
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 	}
 

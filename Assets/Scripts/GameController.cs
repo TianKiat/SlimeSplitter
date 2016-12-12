@@ -54,10 +54,16 @@ public class GameController : MonoBehaviour {
 		{
 			if (GameObject.FindGameObjectsWithTag("Ball").Length == 0) 
 			{
-				//count down
+				//count down to next wave
+				// re-init seed for new spawn
+				int seed = GetSeed();
+				Random.InitState(seed);
+				PlayerPrefs.SetInt("seed", seed);
+				PlayerPrefs.Save();
 				yield return StartCoroutine(CountDown(3));
 				SpawnWave();
 			}
+
 			yield return null;
 		}
 		// game over
@@ -139,5 +145,11 @@ public class GameController : MonoBehaviour {
 		// fade countDownText out
 		countDownText.DOFade(0, .5f);
 		yield return null;
+	}
+	public static int GetSeed()
+	{
+		string _temp = System.DateTime.Now.Day.ToString() + System.DateTime.Now.Hour.ToString() + System.DateTime.Now.Minute.ToString() + System.DateTime.Now.Second.ToString();
+		int _seed = int.Parse(_temp); 
+		return _seed;
 	}
 }
