@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-		DOTween.Init(); // init DOTween
+		DOTween.Init(true, true); // init DOTween
 		wavesInfo = ReadWavesFile("Assets/Levels.txt");
 		// init countDownText
 		countDownText.DOFade(0, 0);
@@ -58,6 +58,7 @@ public class GameController : MonoBehaviour {
 				yield return StartCoroutine(CountDown(3));
 				SpawnWave();
 			}
+			yield return null;
 		}
 		// game over
 		Debug.Log("Game Over");
@@ -73,7 +74,6 @@ public class GameController : MonoBehaviour {
 		waveNumberText.text = waveNumber.ToString();
 		waveNumberText.fontSize = 70;
 		DOTween.To(()=> waveNumberText.fontSize, x=> waveNumberText.fontSize = x, 50, .2f);
-
 	}
 	// Method: Read the waves file
 	int[] ReadWavesFile(string fileName)
@@ -93,7 +93,6 @@ public class GameController : MonoBehaviour {
 	             {
 	                 // Do whatever you need to do with the text line, it's a string now
 	                 // In this example, I split it into arguments based on comma
-	                 // deliniators, then send that array to DoStuff()
 	                 string[] entries = line.Split(',');
 	                 if (entries.Length > 0)
 	                 {

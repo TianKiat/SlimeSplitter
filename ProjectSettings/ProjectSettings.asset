@@ -458,7 +458,8 @@ PlayerSettings:
   vrEditorSettings: {}
   cloudServicesEnabled:
     Collab: 1
-  cloudProjectId: 5e88dd93-d20a-4a3d-9f6a-531222dbca8b
-  projectName: Bubble Struggle Replica
+    UNet: 1
+  cloudProjectId: 7fdff267-a202-46b7-859c-092e30d0c438
+  projectName: Slime Splitter
   organizationId: ng-tian-kiat
   cloudEnabled: 0
